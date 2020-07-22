@@ -29,9 +29,7 @@ public class LoginService {
             String token = JwtUtil.generateToken(user, secretKey, 15);
             return new LoginResponse(token);
         } catch (AuthenticationException e) {
-            e.printStackTrace();
+            return new LoginResponse("");
         }
-
-        return null;
     }
 }

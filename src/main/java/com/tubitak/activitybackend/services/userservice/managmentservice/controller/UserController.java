@@ -21,7 +21,6 @@ public class UserController {
     private final CustomUserDetailsManager userService;
     private final IUserMapper userMapper;
 
-
     @PostMapping("/create")
     public ResponseEntity<Response> createUser(@RequestBody UserDTO userDTO) {
         if (userDTO.equals(null)) {

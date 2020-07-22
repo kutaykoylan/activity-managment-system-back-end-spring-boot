@@ -18,7 +18,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "**")
 @RestController
 @RequestMapping("/activity")
 public class ActivityController {
