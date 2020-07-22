@@ -10,7 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @SpringBootApplication
 @EnableJpaAuditing
-public class ActivityBackendApplication {
+public class ActivityBackendApplication  {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ActivityBackendApplication.class, args);

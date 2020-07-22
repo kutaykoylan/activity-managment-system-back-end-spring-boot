@@ -1,7 +1,7 @@
 package com.tubitak.activitybackend.services.activityservice.data.entity;
 
 import com.tubitak.activitybackend.common.data.BaseEntity;
-import com.tubitak.activitybackend.services.userservice.data.entitity.User;
+import com.tubitak.activitybackend.services.userservice.common.data.entitity.User;
 import lombok.*;
 
 import javax.persistence.*;

@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,7 +33,7 @@ public class ActivityController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Response> addActivity(@RequestBody ActivityDTO activityDTO) {
+    public ResponseEntity<Response> addActivity(@RequestBody @Valid ActivityDTO activityDTO) {
         if (activityDTO == null) {
             throw new BadRequestException("You send an empty activity");
         } else {
@@ -78,7 +79,7 @@ public class ActivityController {
     }
 
     @PatchMapping("/update")
-    public ResponseEntity<Response> updateActivity(@RequestBody ActivityDTO activityDTO){
+    public ResponseEntity<Response> updateActivity(@RequestBody @Valid ActivityDTO activityDTO){
         Optional<Activity> activity=Optional.ofNullable(activityService.getById(activityDTO.getId()));
         if (activity.isPresent()) {
             activity.get().setAllData(activityDTO.getTitle(),activityDTO.getDetails(),activityDTO.getLocationLat(),activityDTO.getLocationLng(),activityDTO.getStartDate(),activityDTO.getEndDate());
@@ -91,7 +92,7 @@ public class ActivityController {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<Response> deleteActivity(@RequestBody ActivityDTO activityDTO){
+    public ResponseEntity<Response> deleteActivity(@RequestBody @Valid ActivityDTO activityDTO){
         Optional<Activity> activity = Optional.ofNullable(activityService.getByAllDetails(activityMapper.mapToEntity(activityDTO)));
         if(activity.isPresent()){
             activityService.delete(activity.get().getId());
