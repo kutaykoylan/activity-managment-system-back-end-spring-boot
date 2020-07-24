@@ -33,15 +33,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/login").permitAll()
-                .antMatchers("/user/create").permitAll()
                 .antMatchers("/activity/allActivities").permitAll()
                 .antMatchers("/activity/allActivities/**").permitAll()
                 .antMatchers("/activity/add").permitAll()
                 .antMatchers("/activity/pages/**").permitAll()
                 .antMatchers("/activity/numberOfPages").permitAll()
-                .antMatchers("/activity/add").hasRole("ADMIN")
-                .antMatchers("/activity/update").hasRole("ADMIN")
-                .antMatchers("/activity/delete").hasRole("ADMIN")
+                .antMatchers("/activity/add").hasAuthority("ADMIN")
+                .antMatchers("/user/create").hasAuthority("ADMIN")
+                .antMatchers("/activity/update").hasAuthority("ADMIN")
+                .antMatchers("/activity/delete").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()
@@ -51,7 +51,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().disable()
                 .logout().disable()
                 .httpBasic().disable()
+                .cors()
+                .and()
                 .csrf().disable();
+
     }
 
 

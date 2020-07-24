@@ -1,5 +1,7 @@
 package com.tubitak.activitybackend.services.userservice.common.service;
+import com.tubitak.activitybackend.services.userservice.common.data.entitity.Authority;
 import com.tubitak.activitybackend.services.userservice.common.data.entitity.User;
+import com.tubitak.activitybackend.services.userservice.common.data.repository.AuthorityRepository;
 import com.tubitak.activitybackend.services.userservice.common.data.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -11,16 +13,25 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+
 @Service
 @RequiredArgsConstructor
 public class CustomUserDetailsManager implements UserDetailsManager {
 
     private final UserRepository userRepository;
+    private final AuthorityRepository authorityRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Override
     public void createUser(final UserDetails user) {
         User users = (User) user;
+        Optional<Authority> authority = authorityRepository.findById(2L);
+        if (authority.isPresent()){
+            users.setAuthorities(Set.of(authority.get()));
+        }
         users.setPassword(passwordEncoder.encode(users.getPassword()));
         userRepository.save(users);
     }

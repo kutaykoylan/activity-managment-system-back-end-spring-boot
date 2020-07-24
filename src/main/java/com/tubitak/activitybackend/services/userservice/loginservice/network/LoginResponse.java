@@ -6,8 +6,11 @@ import lombok.Getter;
 public class LoginResponse {
 
     private final String token;
+    private final String authority;
 
-    public LoginResponse(final String token) {
+    public LoginResponse(String token, String authority) {
         this.token = token;
+        this.authority = authority;
     }
+
 }

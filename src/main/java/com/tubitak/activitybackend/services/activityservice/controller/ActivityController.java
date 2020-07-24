@@ -18,7 +18,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "**")
+@CrossOrigin("http://localhost:3000")
 @RestController
 @RequestMapping("/activity")
 public class ActivityController {
