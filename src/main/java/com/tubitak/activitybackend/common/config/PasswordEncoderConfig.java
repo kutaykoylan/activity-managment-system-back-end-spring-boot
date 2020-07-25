@@ -1,4 +1,4 @@
-package com.tubitak.activitybackend.services.userservice.common.config;
+package com.tubitak.activitybackend.common.config;
 
 
 import org.springframework.context.annotation.Bean;

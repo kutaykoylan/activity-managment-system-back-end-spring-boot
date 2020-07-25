@@ -1,4 +1,4 @@
-package com.tubitak.activitybackend.services.userservice.common.config;
+package com.tubitak.activitybackend.common.config;
 
 import com.tubitak.activitybackend.services.userservice.common.data.entitity.User;
 import com.tubitak.activitybackend.services.userservice.common.service.CustomUserDetailsManager;

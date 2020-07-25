@@ -60,9 +60,6 @@ public class User implements UserDetails, CredentialsContainer {
     @Column
     private String address;
 
-    @ManyToMany(mappedBy = "usersOfActivities")
-    private Set<Activity> activitiesOfUser;
-
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "USER_AUTHORITIES",

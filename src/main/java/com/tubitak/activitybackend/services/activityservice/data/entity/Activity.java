@@ -40,13 +40,8 @@ public class Activity extends BaseEntity {
     @FutureOrPresent
     private LocalDate endDate;
 
-    @ManyToMany
-    @JoinTable(
-            name = "users_of_activity",
-            joinColumns = @JoinColumn(name = "activity_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    private Set<User> usersOfActivities;
+    @Column
+    private String maxCapacity;
 
     @AssertTrue
     public boolean isValidDate(){

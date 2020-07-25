@@ -11,7 +11,7 @@ public interface IActivityMapper {
 
     ActivityDTO mapToDto(Activity activity);
 
-    List<ActivityDTO> mapToDto(List<Activity> studentList);
+    List<ActivityDTO> mapToDto(List<Activity> activityList);
 
     Activity mapToEntity(ActivityDTO activityDTO);
 

@@ -34,6 +34,8 @@ public class ActivityDTO {
     @FutureOrPresent
     private LocalDate endDate;
 
+    private String maxCapacity;
+
 
     @AssertTrue
     public boolean isValidDate(){

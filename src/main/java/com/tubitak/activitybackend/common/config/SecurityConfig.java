@@ -1,4 +1,4 @@
-package com.tubitak.activitybackend.services.userservice.common.config;
+package com.tubitak.activitybackend.common.config;
 
 
 import com.tubitak.activitybackend.services.userservice.common.service.CustomUserDetailsManager;
@@ -33,13 +33,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/login").permitAll()
+                .antMatchers("/user/create").permitAll()
                 .antMatchers("/activity/allActivities").permitAll()
                 .antMatchers("/activity/allActivities/**").permitAll()
                 .antMatchers("/activity/add").permitAll()
                 .antMatchers("/activity/pages/**").permitAll()
                 .antMatchers("/activity/numberOfPages").permitAll()
+                .antMatchers("/usersActivities/users").hasAuthority("ADMIN")
+                .antMatchers("/usersActivities/activities").hasAuthority("USER")
+                .antMatchers("/usersActivities/delete").hasAuthority("USER")
+                .antMatchers("/usersActivities/create").hasAuthority("USER")
                 .antMatchers("/activity/add").hasAuthority("ADMIN")
-                .antMatchers("/user/create").hasAuthority("ADMIN")
                 .antMatchers("/activity/update").hasAuthority("ADMIN")
                 .antMatchers("/activity/delete").hasAuthority("ADMIN")
                 .anyRequest().authenticated()
