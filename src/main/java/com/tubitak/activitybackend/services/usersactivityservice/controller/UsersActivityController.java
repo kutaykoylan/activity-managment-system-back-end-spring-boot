@@ -3,15 +3,15 @@ package com.tubitak.activitybackend.services.usersactivityservice.controller;
 import com.tubitak.activitybackend.common.exception.BadRequestException;
 import com.tubitak.activitybackend.common.response.Response;
 import com.tubitak.activitybackend.services.activityservice.data.entity.Activity;
-import com.tubitak.activitybackend.services.activityservice.dto.ActivityDTO;
-import com.tubitak.activitybackend.services.activityservice.mapper.IActivityMapper;
 import com.tubitak.activitybackend.services.usersactivityservice.data.UsersActivity;
+import com.tubitak.activitybackend.services.usersactivityservice.dto.ActivityDTO;
+import com.tubitak.activitybackend.services.usersactivityservice.dto.UserDTO;
 import com.tubitak.activitybackend.services.usersactivityservice.dto.UsersActivityDTO;
+import com.tubitak.activitybackend.services.usersactivityservice.mapper.IActivityMapperForUsersActivities;
+import com.tubitak.activitybackend.services.usersactivityservice.mapper.IUserMapperForUsersActivities;
 import com.tubitak.activitybackend.services.usersactivityservice.mapper.IUsersActivityMapper;
 import com.tubitak.activitybackend.services.usersactivityservice.service.contract.IUsersActivityService;
 import com.tubitak.activitybackend.services.userservice.common.data.entitity.User;
-import com.tubitak.activitybackend.services.userservice.managmentservice.dto.UserDTO;
-import com.tubitak.activitybackend.services.userservice.managmentservice.mapper.IUserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,17 +19,18 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
-@RestController
 @RequiredArgsConstructor
+@RestController
 @RequestMapping("/usersActivities")
 @CrossOrigin("http://localhost:3000")
 public class UsersActivityController {
 
-    private IUsersActivityService usersActivityService;
-    private IUsersActivityMapper usersActivityMapper;
-    private IUserMapper userMapper;
-    private IActivityMapper activityMapper;
+    private final IUsersActivityService usersActivityService;
+    private final IUsersActivityMapper usersActivityMapper;
+    private final IUserMapperForUsersActivities userMapper;
+    private final IActivityMapperForUsersActivities activityMapper;
+
+
 
     @GetMapping("/users")
     public ResponseEntity<List<UserDTO>> getUsersOfActivity(@RequestBody ActivityDTO activityDTO){
@@ -58,6 +59,7 @@ public class UsersActivityController {
         if (usersActivityDTO == null) {
             throw new BadRequestException("You send an empty request body!");
         } else {
+            System.out.println(usersActivityDTO);
             UsersActivity usersActivity = usersActivityMapper.mapToEntity(usersActivityDTO);
             usersActivityService.registerActivity(usersActivity);
             return new ResponseEntity<>(new Response("User registered successfully!"), HttpStatus.CREATED);

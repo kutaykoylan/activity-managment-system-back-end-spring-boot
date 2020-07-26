@@ -28,7 +28,7 @@ public class User implements UserDetails, CredentialsContainer {
     private Long id;
 
 
-    @Column(unique = true,updatable = false)
+    @Column(unique = true,updatable = false,nullable = true)
     @com.tubitak.activitybackend.services.userservice.common.validator.TCSecurityNumber
     private String tcSecurityNumber;
 
@@ -41,7 +41,7 @@ public class User implements UserDetails, CredentialsContainer {
     @NotBlank(message = "Surname field can't be null")
     private String surname;
 
-    @Column(unique = true,updatable = false)
+    @Column(unique = true,updatable = false,nullable = true)
     @NotBlank(message = "Email field can't be null")
     @Email
     private String email;

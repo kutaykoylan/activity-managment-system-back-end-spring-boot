@@ -1,4 +1,5 @@
 package com.tubitak.activitybackend.services.usersactivityservice.dto;
+
 import lombok.*;
 
 @Setter
@@ -6,8 +7,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class UsersActivityDTO {
-
-    private UserDTO userID;
-    private ActivityDTO activityID;
+public class ActivityDTO {
+    private Long id;
 }
