@@ -11,6 +11,7 @@ import com.tubitak.activitybackend.services.userservice.common.data.repository.U
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +28,12 @@ public class UsersActivityService implements IUsersActivityService {
     @Override
     public List<User> getUsersByActivityID(Activity activityID) {
         Optional<Activity> activity=activityRepository.findById(activityID.getId());
-        return usersActivityRepository.findAllByActivityID(activity.get());
+        List<UsersActivity> usersActivities = usersActivityRepository.findAllByActivityID(activity.get());
+        List<User> users = new ArrayList<>();
+        usersActivities.forEach((element)->{
+            users.add(element.getUserID());
+        });
+        return users;
     }
 
     @Override
@@ -54,7 +60,12 @@ public class UsersActivityService implements IUsersActivityService {
     @Override
     public List<Activity> getActivitiesByUserID(User userID) {
         Optional<User> user = userRepository.findByUsername(userID.getUsername());
-        return usersActivityRepository.findAllByUserID(user.get());
+        List<UsersActivity> usersActivities= usersActivityRepository.findAllByUserID(user.get());
+        List<Activity> activities = new ArrayList<>();
+        usersActivities.forEach((element)->{
+            activities.add(element.getActivityID());
+        });
+        return activities;
     }
 
 

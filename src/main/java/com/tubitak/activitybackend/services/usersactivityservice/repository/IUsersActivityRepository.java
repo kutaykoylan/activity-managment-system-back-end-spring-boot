@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IUsersActivityRepository extends JpaRepository<UsersActivity,Long> {
-    List<Activity> findAllByUserID(User userID);
-    List<User> findAllByActivityID(Activity activityID);
+    List<UsersActivity> findAllByUserID(User userID);
+    List<UsersActivity> findAllByActivityID(Activity activityID);
     Optional<UsersActivity> findByUserIDAndActivityID(User userID,Activity activityID);
 }

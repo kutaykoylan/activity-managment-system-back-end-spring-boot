@@ -36,6 +36,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/create").permitAll()
                 .antMatchers("/activity/allActivities").permitAll()
                 .antMatchers("/activity/allActivities/**").permitAll()
+                .antMatchers("/mail/send").permitAll()
+                .antMatchers("/QR").permitAll()
                 .antMatchers("/activity/add").permitAll()
                 .antMatchers("/activity/pages/**").permitAll()
                 .antMatchers("/activity/numberOfPages").permitAll()

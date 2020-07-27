@@ -4,12 +4,8 @@ import com.tubitak.activitybackend.common.exception.BadRequestException;
 import com.tubitak.activitybackend.common.response.Response;
 import com.tubitak.activitybackend.services.activityservice.data.entity.Activity;
 import com.tubitak.activitybackend.services.usersactivityservice.data.UsersActivity;
-import com.tubitak.activitybackend.services.usersactivityservice.dto.ActivityDTO;
-import com.tubitak.activitybackend.services.usersactivityservice.dto.UserDTO;
-import com.tubitak.activitybackend.services.usersactivityservice.dto.UsersActivityDTO;
-import com.tubitak.activitybackend.services.usersactivityservice.mapper.IActivityMapperForUsersActivities;
-import com.tubitak.activitybackend.services.usersactivityservice.mapper.IUserMapperForUsersActivities;
-import com.tubitak.activitybackend.services.usersactivityservice.mapper.IUsersActivityMapper;
+import com.tubitak.activitybackend.services.usersactivityservice.dto.*;
+import com.tubitak.activitybackend.services.usersactivityservice.mapper.*;
 import com.tubitak.activitybackend.services.usersactivityservice.service.contract.IUsersActivityService;
 import com.tubitak.activitybackend.services.userservice.common.data.entitity.User;
 import lombok.RequiredArgsConstructor;
@@ -29,18 +25,19 @@ public class UsersActivityController {
     private final IUsersActivityMapper usersActivityMapper;
     private final IUserMapperForUsersActivities userMapper;
     private final IActivityMapperForUsersActivities activityMapper;
-
+    private final IUserInformationMapper userInformationMapper;
+    private final IActivityInformationMapper activityInformationMapper;
 
 
     @GetMapping("/users")
-    public ResponseEntity<List<UserDTO>> getUsersOfActivity(@RequestBody ActivityDTO activityDTO){
+    public ResponseEntity<List<UserInformationDTO>> getUsersOfActivity(@RequestBody ActivityDTO activityDTO){
         Activity activity =  activityMapper.mapToEntity(activityDTO);
-        return new ResponseEntity<>(userMapper.mapToDto(usersActivityService.getUsersByActivityID(activity)),HttpStatus.OK);
+        return new ResponseEntity<>(userInformationMapper.mapToDto(usersActivityService.getUsersByActivityID(activity)),HttpStatus.OK);
     }
     @GetMapping("/activities")
-    public ResponseEntity<List<ActivityDTO>> getActivitiesOfUser(@RequestBody UserDTO userDTO){
+    public ResponseEntity<List<ActivityInformationDTO>> getActivitiesOfUser(@RequestBody UserDTO userDTO){
         User user =  userMapper.mapToEntity(userDTO);
-        return new ResponseEntity<>(activityMapper.mapToDto(usersActivityService.getActivitiesByUserID(user)),HttpStatus.OK);
+        return new ResponseEntity<>(activityInformationMapper.mapToDto(usersActivityService.getActivitiesByUserID(user)),HttpStatus.OK);
 
     }
     @DeleteMapping("/delete")

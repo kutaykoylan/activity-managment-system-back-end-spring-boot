@@ -2,10 +2,7 @@ package com.tubitak.activitybackend.services.userservice.common.data.entitity;
 
 import com.tubitak.activitybackend.common.data.BaseEntity;
 import com.tubitak.activitybackend.services.activityservice.data.entity.Activity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -16,6 +13,7 @@ import java.util.Set;
 
 @Getter
 @Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
