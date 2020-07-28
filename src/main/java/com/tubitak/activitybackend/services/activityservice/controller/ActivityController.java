@@ -82,7 +82,7 @@ public class ActivityController {
     public ResponseEntity<Response> updateActivity(@RequestBody @Valid ActivityDTO activityDTO){
         Optional<Activity> activity=Optional.ofNullable(activityService.getById(activityDTO.getId()));
         if (activity.isPresent()) {
-            activity.get().setAllData(activityDTO.getTitle(),activityDTO.getDetails(),activityDTO.getLocationLat(),activityDTO.getLocationLng(),activityDTO.getStartDate(),activityDTO.getEndDate());
+            activity.get().setAllData(activityDTO.getTitle(),activityDTO.getDetails(),activityDTO.getLocationLat(),activityDTO.getLocationLng(),activityDTO.getStartDate(),activityDTO.getEndDate(),activityDTO.getMaxCapacity());
             activity.get().setId(activityDTO.getId());
             activityService.saveOrUpdate(activity.get());
             return new ResponseEntity<>(new Response("Activity is updated successfully"), HttpStatus.OK);

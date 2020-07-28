@@ -50,7 +50,7 @@ public class ActivityService implements IActivityService {
        }else{
            activityTemp= new Activity();
        }
-        activityTemp.setAllData(activity.getTitle(),activity.getDetails(),activity.getLocationLat(),activity.getLocationLng(),activity.getStartDate(),activity.getEndDate());
+        activityTemp.setAllData(activity.getTitle(),activity.getDetails(),activity.getLocationLat(),activity.getLocationLng(),activity.getStartDate(),activity.getEndDate(),activity.getMaxCapacity());
         System.out.println("this is activity temp\n"+activityTemp);
        return activityRepository.save(activityTemp);
     }

@@ -48,12 +48,13 @@ public class Activity extends BaseEntity {
         return endDate.compareTo(startDate)>=0;
     }
 
-    public void setAllData(String title,String details,double locationLat,double locationLng,LocalDate startDate,LocalDate endDate){
+    public void setAllData(String title,String details,double locationLat,double locationLng,LocalDate startDate,LocalDate endDate,String maxCapacity){
         setTitle(title);
         setDetails(details);
         setLocationLat(locationLat);
         setLocationLng(locationLng);
         setStartDate(startDate);
         setEndDate(endDate);
+        setMaxCapacity(maxCapacity);
     }
 }
