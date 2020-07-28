@@ -29,14 +29,16 @@ public class UsersActivityController {
     private final IActivityInformationMapper activityInformationMapper;
 
 
-    @GetMapping("/users")
-    public ResponseEntity<List<UserInformationDTO>> getUsersOfActivity(@RequestBody ActivityDTO activityDTO){
-        Activity activity =  activityMapper.mapToEntity(activityDTO);
+    @GetMapping("/users/{id}")
+    public ResponseEntity<List<UserInformationDTO>> getUsersOfActivity(@PathVariable String id){
+        Activity activity = new Activity();
+        activity.setId(Long.parseLong(id));
         return new ResponseEntity<>(userInformationMapper.mapToDto(usersActivityService.getUsersByActivityID(activity)),HttpStatus.OK);
     }
-    @GetMapping("/activities")
-    public ResponseEntity<List<ActivityInformationDTO>> getActivitiesOfUser(@RequestBody UserDTO userDTO){
-        User user =  userMapper.mapToEntity(userDTO);
+    @GetMapping("/activities/{username}")
+    public ResponseEntity<List<ActivityInformationDTO>> getActivitiesOfUser(@PathVariable String username){
+        User user =  new User();
+        user.setUsername(username);
         return new ResponseEntity<>(activityInformationMapper.mapToDto(usersActivityService.getActivitiesByUserID(user)),HttpStatus.OK);
 
     }
