@@ -11,7 +11,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 @CrossOrigin("http://localhost:3000")
 @RestController
@@ -23,8 +26,16 @@ public class QRCodeController {
     private final IActivityMapperForQRCodeService activityMapperForQRCodeService;
     private final IUserMapperForQRCodeService userMapperForQRCodeService;
 
-    @GetMapping
-    public ResponseEntity<BufferedImage> getRegisterDetailsAsQRCode(@RequestBody QRCodeDTO qrCodeDTO){
-        return new ResponseEntity<>(iqrCodeService.generateQRCode(userMapperForQRCodeService.mapToEntity(qrCodeDTO.getUserDTO()),activityMapperForQRCodeService.mapToEntity(qrCodeDTO.getActivityDTO())), HttpStatus.OK);
+    @PostMapping
+    public ResponseEntity<byte[]> getRegisterDetailsAsQRCode(@RequestBody QRCodeDTO qrCodeDTO){
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        BufferedImage bufferedImage = iqrCodeService.generateQRCode(userMapperForQRCodeService.mapToEntity(qrCodeDTO.getUserDTO()),activityMapperForQRCodeService.mapToEntity(qrCodeDTO.getActivityDTO()));
+        try {
+            ImageIO.write(bufferedImage, "jpg", baos);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        byte[] bytes = baos.toByteArray();
+        return new ResponseEntity<>(bytes, HttpStatus.OK);
     }
 }

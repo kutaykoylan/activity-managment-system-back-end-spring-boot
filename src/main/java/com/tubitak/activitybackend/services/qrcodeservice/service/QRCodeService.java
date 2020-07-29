@@ -1,5 +1,6 @@
 package com.tubitak.activitybackend.services.qrcodeservice.service;
 
+import com.tubitak.activitybackend.common.exception.BadRequestException;
 import com.tubitak.activitybackend.services.activityservice.data.entity.Activity;
 import com.tubitak.activitybackend.services.activityservice.data.repository.ActivityRepository;
 import com.tubitak.activitybackend.services.mailservice.util.InformationStringGenerator;
@@ -23,18 +24,17 @@ public class QRCodeService implements IQRCodeService {
 
     @Override
     public BufferedImage generateQRCode(User user, Activity activity) {
-
         Optional<User> userToSend = userRepository.findByUsername(user.getUsername());
         Optional<Activity> activityThatRegistered = activityRepository.findById(activity.getId());
+        BufferedImage bufferedImage;
         if (userToSend.isPresent() && activityThatRegistered.isPresent()) {
             try {
-                BufferedImage bufferedImage = QRCodeGenerator.generateQRCodeImage(InformationStringGenerator.getRegistrationInformation(userToSend.get(), activityThatRegistered.get()));
+                bufferedImage = QRCodeGenerator.generateQRCodeImage(InformationStringGenerator.getRegistrationInformation(userToSend.get(), activityThatRegistered.get()));
                 return bufferedImage;
             } catch (Exception e) {
                 return null;
             }
-
-        }else
-        return null;
+        } else
+            throw new BadRequestException("Bad Request!");
     }
 }

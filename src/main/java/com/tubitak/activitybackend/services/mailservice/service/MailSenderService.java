@@ -44,7 +44,7 @@ public class MailSenderService implements IMailSenderService {
             MimeMessage msg = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(msg, true);
             helper.setTo(userToSend.get().getEmail());
-            helper.setSubject("Welcome to Activite" + activityThatRegistered.get().getTitle());
+            helper.setSubject("Welcome to " + activityThatRegistered.get().getTitle());
             helper.setText("Details of the acitivite;\n" + activityThatRegistered.get().getDetails() + "\n Your QR code that symbolize your registration\n");
             File outputfile = new File(userToSend.get().getName() + "_" + activityThatRegistered.get().getTitle());
             BufferedImage bufferedImage = null;
