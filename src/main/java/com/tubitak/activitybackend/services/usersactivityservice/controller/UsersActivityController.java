@@ -13,7 +13,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @RestController
@@ -42,6 +45,13 @@ public class UsersActivityController {
         return new ResponseEntity<>(activityInformationMapper.mapToDto(usersActivityService.getActivitiesByUserID(user)),HttpStatus.OK);
 
     }
+    @GetMapping("/numberOfRegistrationByDates/{activityID}")
+    public ResponseEntity<Map<LocalDate,Integer>> getNumberOfRegistrationTillToday(@PathVariable String activityID){
+        ActivityDTO activityDTO = new ActivityDTO();
+        activityDTO.setId(Long.parseLong(activityID));
+        return new ResponseEntity<>(usersActivityService.getNumberOfRegistration(activityDTO),HttpStatus.OK);
+    }
+
     @DeleteMapping("/delete")
     public ResponseEntity<Response> deleteRegistrationOfUser(@RequestBody UsersActivityDTO usersActivityDTO){
         if (usersActivityDTO == null) {
@@ -53,6 +63,19 @@ public class UsersActivityController {
         }
 
     }
+    @DeleteMapping("/deleteActivitiesRegistrations/{activityID}")
+    public ResponseEntity<Response> deleteRegistrationOfActivities(@PathVariable String  activityID){
+        if ( activityID.equals("") || activityID.equals(null) ) {
+            throw new BadRequestException("You send an empty request body!");
+        } else {
+            Activity activity = new Activity();
+            activity.setId(Long.parseLong(activityID));
+            usersActivityService.deleteActivitySRegistrations(activity);
+            return new ResponseEntity<>(new Response("Registration of Activity deleted his/her registration to the activity successfully!"), HttpStatus.OK);
+        }
+
+    }
+
     @PostMapping("/create")
     public ResponseEntity<Response> registerToActivity(@RequestBody UsersActivityDTO usersActivityDTO){
         if (usersActivityDTO == null) {
