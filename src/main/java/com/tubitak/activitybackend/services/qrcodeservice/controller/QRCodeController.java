@@ -15,6 +15,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 
 @CrossOrigin("http://localhost:3000")
 @RestController
@@ -37,5 +38,12 @@ public class QRCodeController {
         }
         byte[] bytes = baos.toByteArray();
         return new ResponseEntity<>(bytes, HttpStatus.OK);
+    }
+
+    private static byte[] toByteArrayAutoClosable(BufferedImage image, String type) throws IOException {
+        try (ByteArrayOutputStream out = new ByteArrayOutputStream()){
+            ImageIO.write(image, type, out);
+            return out.toByteArray();
+        }
     }
 }

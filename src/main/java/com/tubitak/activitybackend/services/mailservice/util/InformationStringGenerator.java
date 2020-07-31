@@ -11,14 +11,16 @@ public class InformationStringGenerator {
                 " \"startDate\" : \""+activity.getStartDate()+"\"," +
                 "  \"endDate\" :\""+activity.getEndDate()+"\"," +
                 "\"locationLat\": \""+activity.getLocationLat()+"\" , " +
-                "\"locationLng\": \""+activity.getLocationLat()+"\" }" +
+                "\"locationLng\": \""+activity.getLocationLat()+"\" }," +
                 "\"user\":{ " +
-                "\"tcSecurityNumber\": \""+user.getTcSecurityNumber()+"\" ," +
+                /*"\"tcSecurityNumber\": \""+user.getTcSecurityNumber()+"\" ," +
                 " \"name\": \""+user.getName()+"\" ," +
                 " \"surname\" : \""+user.getSurname()+"\"," +
-                "  \"email\" :\""+user.getEmail()+"\"," +
-                "\"username\": \""+user.getUsername()+"\" , " +
-                "\"birthDate\": \""+user.getBirthDate()+"\"" +
-                ", \"address\": \""+user.getAddress()+"\" }";
+                "  \"email\" :\""+user.getEmail()+"\"," +*/
+                "\"username\": \""+user.getUsername()+"\"}";
     }
+    /*
+     "\"birthDate\": \""+user.getBirthDate()+"\"" +
+                ", \"address\": \""+user.getAddress()+"\" 
+     */
 }
